@@ -90,3 +90,21 @@ class AbstractCallBackParser(object):
 class CallBackXMLParser(AbstractCallBackParser):
     def run(self, source):
         xml.sax.parse(source, CallBackHandler(self.cb_map))
+
+
+def handle_model_instance(mapper, context):
+    if mapper.extract(context):
+        inst = mapper.save()
+        logger.debug(inst)
+
+
+class ModelAwareXMLParser(CallBackXMLParser):
+    """
+        Creating model instances for parsed entities
+    """
+    def register_mapper(self, name, mapper):
+        assert isinstance(mapper, ModelMapper)
+        self.register_cb(
+            name,
+            functools.partial(handle_model_instance, mapper)
+        )
