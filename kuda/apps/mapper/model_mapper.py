@@ -53,7 +53,10 @@ class ModelMapperMeta(type):
 class ModelMapper(six.with_metaclass(ModelMapperMeta)):
     """
         Maps an arbitrary data structure to a flat (almost) map, may be easily
-        converted to model instance
+        converted to model instance.
+
+        It doesn't do too much with model, just allows skip absent bindings for
+        nullable fields easily.
     """
     def extract(self, context):
         self.extracted = {}

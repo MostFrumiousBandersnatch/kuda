@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.admin',
 
-    'agenda'
+    'agenda',
+    #just to make it descoverable for default test runner
+    'mapper'
 ]
 
 MIDDLEWARE_CLASSES = [
